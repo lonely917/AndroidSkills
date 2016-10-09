@@ -46,6 +46,9 @@ public class ListWithEditTextActivity extends Activity {
 		datas.add(new Bean("1","1"));
 		datas.add(new Bean("2","2"));
 		datas.add(new Bean("3","3"));
+		datas.add(new Bean("4","4"));
+		datas.add(new Bean("5","5"));
+		datas.add(new Bean("6","6"));
 	}
 
 	@Override
@@ -106,10 +109,12 @@ public class ListWithEditTextActivity extends Activity {
 				viewHolder.textView = (TextView) convertView.findViewById(R.id.textview1);
 				viewHolder.editText = (EditText) convertView.findViewById(R.id.edittext1);
 				convertView.setTag(viewHolder);
+				Log.i("ywb", "new viewholder-"+viewHolder.toString());
 			}
 			else
 			{
 				viewHolder = (ViewHolder) convertView.getTag();
+				Log.i("ywb", "get tag-"+viewHolder.toString());
 			}
 			
 			Log.i("ywb", viewHolder.toString());
@@ -123,28 +128,27 @@ public class ListWithEditTextActivity extends Activity {
 			
 			//更新ref，避免缓存机制导致getview的混乱
 			viewHolder.ref = position;
-			
 			viewHolder.textView.setText(datas.get(position).getTag());
 			viewHolder.editText.setText(datas.get(position).getContent());
-			Log.i("ywb", "getview "+ viewHolder.textView.getText());
+			Log.i("ywb", position+"-getview "+ viewHolder.textView.getText());
 
+			//添加textwatcher，add开头而非点击响应的set命名方式，可以想到类似观察者模式，可能有一个观察者列表，即添加多个watcher
 			viewHolder.editText.addTextChangedListener(new TextWatcher() {
 				
 				@Override
 				public void onTextChanged(CharSequence s, int start, int before, int count) {
-					Log.i(position+"ontextchange", s.toString());
+					Log.i("ywb",position+" ontextchange-"+s.toString());
 					
 				}
 				
 				@Override
 				public void beforeTextChanged(CharSequence s, int start, int count,
 						int after) {
-					Log.i(position+"beforeTextChanged", s.toString());
 				}
 				
 				@Override
 				public void afterTextChanged(Editable s) {
-					Log.i(position+"afterTextChanged", s.toString());
+					Log.i("ywb",position+" afterTextChanged-"+ s.toString());
 					datas.get(viewHolder.ref).setContent(s.toString());
 				}
 			});
@@ -190,3 +194,25 @@ public class ListWithEditTextActivity extends Activity {
 		}
 	}
 }
+
+/**
+ 总结：
+ #1 listview 的itemclick和convertview以及子view事件响应问题
+ 不去除子view的foucusable，itemclick难以触发。
+ 有关edittext的重叠区域点击问题还要探究一下??? 
+ 
+ #2 listview中edittext焦点问题
+ 软键盘的adjustspan属性可以解决，其他的在弹出键盘，listview重绘，逐个getview，会剥夺编辑框焦点，需要再点一次，关闭的时候也一样重绘listview。
+ 
+ #3 listview中对edittext使用textwatcher
+ 大坑啊，本来巧妙的缓存机制convertview的settag，利用viewholder，不清楚细节导致大问题。
+重绘的时候可能会出现新的viewholder，本身设计滑动的时候就是循环的，及时不滑动也会有富余，而addtextwatcher是叠加的，多个观察者，
+这一次利用的viewholder可能是之前的某个，也就意味着它关联了其他的textwatcher，因此编辑框内容变化的时候出发多个watcher，
+如果watcher要更改数据源，使用原先的position则就出乱了，可以对viewholder添加一个实例变量，每次getview的时候及时赋值更新，
+这样及时多个watcher也只会更改对应一个数据源。
+另外的解决办法，不用缓存，每次inflate一个convertview，添加新的viewholder，或者重写edittext（textview子类），添加removeallwatcher的方法，
+每次add的时候先把之前所有的删除 。
+ 
+ 
+ */
+
