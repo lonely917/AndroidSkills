@@ -6,6 +6,9 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,20 +39,13 @@ public class ListWithEditTextActivity extends Activity {
 		
 		MyAdapter adapter = new MyAdapter(ListWithEditTextActivity.this);
 		listView.setAdapter(adapter);
-		listView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				Toast.makeText(ListWithEditTextActivity.this, "onitemclick: position-"+ position+" id-"+id, Toast.LENGTH_SHORT).show();
-			}
-		});
+		
 	}
 
 	private void initData() {
-		datas.add(new Bean());
-		datas.add(new Bean());
-		datas.add(new Bean());
+		datas.add(new Bean("1","1"));
+		datas.add(new Bean("2","2"));
+		datas.add(new Bean("3","3"));
 	}
 
 	@Override
@@ -102,7 +98,7 @@ public class ListWithEditTextActivity extends Activity {
 		@Override
 		public View getView(final int position, View convertView, ViewGroup parent) {
 			
-			ViewHolder viewHolder = null;
+			final ViewHolder viewHolder;
 			if(convertView == null)
 			{
 				convertView = LayoutInflater.from(context).inflate(R.layout.items_text_edit, null);
@@ -116,6 +112,7 @@ public class ListWithEditTextActivity extends Activity {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
 			
+			Log.i("ywb", viewHolder.toString());
 //			convertView.setOnClickListener(new OnClickListener() {
 //				
 //				@Override
@@ -123,29 +120,61 @@ public class ListWithEditTextActivity extends Activity {
 //					Toast.makeText(context, "position:"+position, Toast.LENGTH_SHORT).show();
 //				}
 //			});
-//			
-//			convertView.setOnClickListener(new OnClickListener() {
-//				
-//				@Override
-//				public void onClick(View v) {
-//					Toast.makeText(context, "**position:"+position, Toast.LENGTH_SHORT).show();
-//				}
-//			});
+			
+			//更新ref，避免缓存机制导致getview的混乱
+			viewHolder.ref = position;
+			
+			viewHolder.textView.setText(datas.get(position).getTag());
+			viewHolder.editText.setText(datas.get(position).getContent());
+			Log.i("ywb", "getview "+ viewHolder.textView.getText());
+
+			viewHolder.editText.addTextChangedListener(new TextWatcher() {
+				
+				@Override
+				public void onTextChanged(CharSequence s, int start, int before, int count) {
+					Log.i(position+"ontextchange", s.toString());
+					
+				}
+				
+				@Override
+				public void beforeTextChanged(CharSequence s, int start, int count,
+						int after) {
+					Log.i(position+"beforeTextChanged", s.toString());
+				}
+				
+				@Override
+				public void afterTextChanged(Editable s) {
+					Log.i(position+"afterTextChanged", s.toString());
+					datas.get(viewHolder.ref).setContent(s.toString());
+				}
+			});
 			
 			return convertView;
 		}
 	}
 	
-	static class ViewHolder
+	final static class ViewHolder
 	{
 		public TextView textView;
 		public EditText editText;
+		public int ref;
 	}
 	
 	class Bean
 	{
 		private String tag = "";
 		private String content = "";
+		
+		public Bean()
+		{
+			
+		}
+		
+		public Bean(String tag, String content)
+		{
+			this.tag = tag;
+			this.content = content;
+		}
 		
 		public String getTag() {
 			return tag;
