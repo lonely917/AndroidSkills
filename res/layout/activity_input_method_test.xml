@@ -14,16 +14,25 @@
         android:layout_height="wrap_content"
         android:singleLine="true"
         android:layout_toLeftOf="@+id/submit"
-        android:hint="键盘弹出"/>
+        android:paddingLeft="4dp"
+        android:hint="键盘弹出"
+        android:background="@drawable/test_shape"/>
 
     <Button 
         android:id="@+id/submit"
         android:layout_width="50dip"
     	android:layout_height ="40dip"
     	android:layout_alignParentRight="true"
-    	android:color="#ffddff"
     	android:text="提交"
     	android:textSize="12sp"
-    	android:layout_alignBaseline="@+id/edit"/>
+    	android:layout_margin="4dp"
+    	android:layout_alignBaseline="@+id/edit"
+    	android:background="@drawable/test_shape2"/>
     
+    <Button 
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/test_shape_circle"
+        android:text="circle"/>
 </RelativeLayout>
