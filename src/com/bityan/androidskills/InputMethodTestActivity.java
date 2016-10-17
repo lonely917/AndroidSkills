@@ -43,7 +43,7 @@ public class InputMethodTestActivity extends Activity {
 				    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 				    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 				}
-				Toast.makeText(getApplicationContext(), "click", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "click+hideSoftInputFromWindow", Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
