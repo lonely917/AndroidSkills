@@ -34,11 +34,24 @@ public class IndexActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				
-				//根据包名和类名跳转
-				Intent intent = new Intent();
-				intent.setClassName(packageName, packageName+"."+clsString[position]);
-				Log.d("ywb", packageName+"."+clsString[position]);
-				startActivity(intent);
+//				//方法1：根据包名和类名构造intent
+//				Intent intent = new Intent();
+//				intent.setClassName(packageName, packageName+"."+clsString[position]);
+//				Log.d("ywb", packageName+"."+clsString[position]);
+//				startActivity(intent);
+				
+				//方法2：通过反射构造class传入intent
+				try 
+				{
+					Class intentClass;
+					intentClass = Class.forName(packageName+"."+clsString[position]);
+					Intent intent = new Intent(IndexActivity.this, intentClass);
+					startActivity(intent);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 		});
 	}
