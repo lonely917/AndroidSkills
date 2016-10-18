@@ -1,8 +1,10 @@
 package com.bityan.androidskills;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +17,9 @@ import android.widget.ListView;
 
 public class IndexActivity extends Activity {
 	
-	private String clsString[] = new String[]{"InputMethodTest","ListWithEditText"};
+	private String clsString[] = {"InputMethodTestActivity","ListWithEditTextActivity","ViewEventTestActivity"};
+//	private String clsString[] = new String[]{"InputMethodTestActivity","ListWithEditTextActivity","ViewEventTestActivity"};
+	private String packageName = "com.bityan.androidskills";
 	private ListView listView;
 	
 	@Override
@@ -29,8 +33,12 @@ public class IndexActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				// TODO Auto-generated method stub
 				
+				//根据包名和类名跳转
+				Intent intent = new Intent();
+				intent.setClassName(packageName, packageName+"."+clsString[position]);
+				Log.d("ywb", packageName+"."+clsString[position]);
+				startActivity(intent);
 			}
 		});
 	}
