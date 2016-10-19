@@ -7,5 +7,8 @@
     <string name="title_activity_view_event_test">ViewEventTestActivity</string>
     <string name="title_activity_input_method_test">InputMethodTestActivity</string>
     <string name="title_activity_index">IndexActivity</string>
-
+    <string name="title_activity_test_launch_mode">TestLaunchModeActivity</string>
+    <string name="title_activity_single_top">SingleTopActivity</string>
+    <string name="title_activity_single_task_mode">TestLaunchModeActivity</string>
+    <string name="title_activity_single_instance_mode">SingleTopActivity</string>
 </resources>

@@ -17,7 +17,9 @@ import android.widget.ListView;
 
 public class IndexActivity extends Activity {
 	
-	private String clsString[] = {"InputMethodTestActivity","ListWithEditTextActivity","ViewEventTestActivity"};
+	private String clsString[] = {"InputMethodTestActivity","ListWithEditTextActivity",
+							"ViewEventTestActivity",
+							"TestLaunchModeActivity"};
 //	private String clsString[] = new String[]{"InputMethodTestActivity","ListWithEditTextActivity","ViewEventTestActivity"};
 	private String packageName = "com.bityan.androidskills";
 	private ListView listView;
