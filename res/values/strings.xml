@@ -9,6 +9,8 @@
     <string name="title_activity_index">IndexActivity</string>
     <string name="title_activity_test_launch_mode">TestLaunchModeActivity</string>
     <string name="title_activity_single_top">SingleTopActivity</string>
-    <string name="title_activity_single_task_mode">TestLaunchModeActivity</string>
-    <string name="title_activity_single_instance_mode">SingleTopActivity</string>
+    <string name="title_activity_single_task_mode">SingleTaskMode</string>
+    <string name="title_activity_single_instance_mode">SingleInstanceMode</string>
+    <string name="title_activity_test_crash_handler">TestCrashHandlerActivity</string>
+
 </resources>

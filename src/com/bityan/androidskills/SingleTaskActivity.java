@@ -25,10 +25,7 @@ public class SingleTaskActivity extends Activity {
 		setContentView(R.layout.activity_test_launch_mode);
 		initView();
 		setListeners();
-		
-
-		
-
+		Toast.makeText(this, toString()+"oncreate", Toast.LENGTH_SHORT).show();
 	}
 	
 	private void setListeners() {
@@ -37,7 +34,7 @@ public class SingleTaskActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				intent.setClass(mContext, SingleTaskActivity.class);
+				intent.setClass(mContext, TestLaunchModeActivity.class);
 				startActivity(intent);
 			}
 		});

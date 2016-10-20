@@ -1,18 +1,17 @@
 package com.bityan.androidskills;
 
+import java.lang.Thread.UncaughtExceptionHandler;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
-public class ViewEventTestActivity extends Activity {
+public class TestCrashHandlerActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_view_event_test);
-		TextView tv = null;
-		tv.findViewById(R.id.modeTestTextView);
+		setContentView(R.layout.activity_test_crash_handler);
 	}
 }

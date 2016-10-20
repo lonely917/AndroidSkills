@@ -25,6 +25,7 @@ public class TestLaunchModeActivity extends Activity {
 		setContentView(R.layout.activity_test_launch_mode);
 		initView();
 		setListeners();
+		Toast.makeText(this, toString()+"oncreate", Toast.LENGTH_SHORT).show();
 	}
 	
 	private void setListeners() {
@@ -87,3 +88,14 @@ public class TestLaunchModeActivity extends Activity {
 		super.onDestroy();
 	}
 }
+
+/**
+ * 
+ * 这个示例提供四种模式的互相调用途径，通过toast提示create和destroy移机onNewIntent，展示Stack和Activity的变化细节。
+ * 示例能够体现的只是程序内部的调用，不涉及跨应用程序的调用，两者一些场景会有细微差别，但是模式的含义是具有显示的意义的。
+ * 
+ * 对于standar模式5.0之前程序内外调用无差别，5.0后程序间调用会建立新的stack。
+ * 对于singleTask模式，程序内外调用形式差不多，程序内要制定taskAffinity属性才能加载newTask中，所有行为和名字一致，只有唯一的task含有此Activity。
+ * 不加taskAffinity这个字段，singleTask会对当前栈操作，而不会触发新的栈(即使之前不存在此Activity实例)，这点官方文档未明确。
+ * 随着版本改进行为可能变化，控制也会更简单，技术发展的趋势如此。
+ */
