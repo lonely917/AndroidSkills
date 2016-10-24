@@ -35,4 +35,10 @@
         android:layout_centerInParent="true"
         android:background="@drawable/test_shape_circle"
         android:text="circle"/>
+    
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/line_shape"
+        android:layout_centerInParent="true"/>
 </RelativeLayout>
