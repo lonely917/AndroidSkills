@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,16 +15,19 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class IndexActivity extends Activity {
 	
 	private String clsString[] = {"InputMethodTestActivity","ListWithEditTextActivity",
 							"ViewEventTestActivity",
 							"TestLaunchModeActivity",
-							"TestCrashHandlerActivity"};
+							"TestCrashHandlerActivity",
+							"ThreadAndServiceActivity"};
 //	private String clsString[] = new String[]{"InputMethodTestActivity","ListWithEditTextActivity","ViewEventTestActivity"};
 	private String packageName = "com.bityan.androidskills";
 	private ListView listView;
+	private Boolean clickTwice = false; 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,5 +80,28 @@ public class IndexActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public void onBackPressed() {
+		
+		if(clickTwice)
+		{
+			super.onBackPressed();
+//			System.exit(0);
+		}
+		else
+		{
+			clickTwice = true;
+			new Handler().postDelayed(new Runnable() {
+				
+				@Override
+				public void run() {
+					clickTwice = false;
+				}
+			}, 2000);
+			Toast.makeText(this, "再次点击退出程序", Toast.LENGTH_SHORT).show();
+		}
+		
 	}
 }

@@ -12,5 +12,6 @@
     <string name="title_activity_single_task_mode">SingleTaskMode</string>
     <string name="title_activity_single_instance_mode">SingleInstanceMode</string>
     <string name="title_activity_test_crash_handler">TestCrashHandlerActivity</string>
+    <string name="title_activity_thread_and_service">ThreadAndServiceActivity</string>
 
 </resources>

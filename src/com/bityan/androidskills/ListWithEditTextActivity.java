@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -213,6 +214,6 @@ public class ListWithEditTextActivity extends Activity {
 另外的解决办法，不用缓存，每次inflate一个convertview，添加新的viewholder，或者重写edittext（textview子类），添加removeallwatcher的方法，
 每次add的时候先把之前所有的删除 。
  
- 
+ service不结束的话，程序退出后(系统有缓存)，会有一个进程和一个服务依然运行，如果是thread，则是只有缓存没有任何在运行的进程(管理器里面正在运行的程序)
  */
 
