@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="14"
         android:targetSdkVersion="21" />
 
     <application
@@ -77,19 +77,22 @@
             android:label="@string/title_activity_test_crash_handler" >
         </activity>
 
-        <service
-            android:name=".TestService">
+        <service android:name=".TestService" >
         </service>
 
-<!--         <service -->
-<!--         android:name=".TestService" -->
-<!--         android:enabled="true" -->
-<!--         android:process="system" > -->
-<!--         </service> -->
+        <!-- <service -->
+        <!-- android:name=".TestService" -->
+        <!-- android:enabled="true" -->
+        <!-- android:process="system" > -->
+        <!-- </service> -->
 
         <activity
             android:name=".ThreadAndServiceActivity"
             android:label="@string/title_activity_thread_and_service" >
+        </activity>
+        <activity
+            android:name=".TestDialogActivity"
+            android:label="@string/title_activity_test_dialog" >
         </activity>
     </application>
 

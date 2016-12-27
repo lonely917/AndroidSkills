@@ -1,20 +1,51 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
         -->
     </style>
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+
+    <!-- 提示不能找到 Theme.Dialog.Alert,但是这个在系统theme.xml中确实有的，只是能看到Theme.Dialog，此类型下的其他子集看不到，代码里也不行，不知原因 -->
+    <!-- <style name="CustomDialog" parent="android:style/Theme.Dialog.Alert"> -->
+
+
+    <!-- </style> -->
+
+
+    <!-- 系统文件 -->
+    <!-- <style name="Theme.Dialog.Alert"> -->
+    <!-- <item name="windowBackground">@color/transparent</item> -->
+    <!-- <item name="windowTitleStyle">@style/DialogWindowTitle</item> -->
+    <!-- <item name="windowContentOverlay">@null</item> -->
+    <!-- <item name="itemTextAppearance">@style/TextAppearance.Large.Inverse</item> -->
+    <!-- <item name="textAppearanceListItem">@style/TextAppearance.Large.Inverse</item> -->
+    <!-- <item name="textAppearanceListItemSmall">@style/TextAppearance.Large.Inverse</item> -->
+    <!-- <item name="textAppearanceListItemSecondary">@style/TextAppearance.Small.Inverse</item> -->
+    <!-- </style> -->
+
+    <style name="CustomDialog2">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:textColor">@android:color/holo_blue_bright</item>
+        <item name="android:textSize">50dp</item>
+    </style>
+
+    <style name="CustomDialogNoTitle">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowNoTitle">true</item><!-- 除去title -->
     </style>
 
 </resources>

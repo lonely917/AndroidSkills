@@ -210,10 +210,11 @@ public class ListWithEditTextActivity extends Activity {
 重绘的时候可能会出现新的viewholder，本身设计滑动的时候就是循环的，及时不滑动也会有富余，而addtextwatcher是叠加的，多个观察者，
 这一次利用的viewholder可能是之前的某个，也就意味着它关联了其他的textwatcher，因此编辑框内容变化的时候出发多个watcher，
 如果watcher要更改数据源，使用原先的position则就出乱了，可以对viewholder添加一个实例变量，每次getview的时候及时赋值更新，
-这样及时多个watcher也只会更改对应一个数据源。
+这样即使多个watcher也只会更改对应一个数据源。
 另外的解决办法，不用缓存，每次inflate一个convertview，添加新的viewholder，或者重写edittext（textview子类），添加removeallwatcher的方法，
-每次add的时候先把之前所有的删除 。
- 
+每次add的时候先把之前所有的删除 ，textview只有对某个指定的textwatcher删除的方法，没有清除添加的所有监听器集合的方法。
+Note：上述添加textwatcher的代码放到第一次new ViewHolder的地方是否就避免了多个监听器的情况(虽然 多个监听器已经指向同一个目标)
+
  service不结束的话，程序退出后(系统有缓存)，会有一个进程和一个服务依然运行，如果是thread，则是只有缓存没有任何在运行的进程(管理器里面正在运行的程序)
  */
 
