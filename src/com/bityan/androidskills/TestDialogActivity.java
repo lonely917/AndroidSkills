@@ -107,13 +107,30 @@ public class TestDialogActivity extends Activity {
 					showAlertDialogCustom();
 					break;
 				case 8:
-//					showAlertDialogCustom();
+					showAlertDialogCustomByDialog();
 					break;
 				default:
 					break;
 				}
 			}
 		});
+	}
+
+	void showAlertDialogCustomByDialog()
+	{
+		
+		final String[] items = {"1","2","3"};
+		AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT);
+		View v = getLayoutInflater().inflate(R.layout.dialog_custom, null);
+//		LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+		Dialog dialog = builder.create();
+		dialog.setCanceledOnTouchOutside(true);
+		dialog.show();
+//		dialog.setContentView(v,lp);//这句话要写在show之后，但是不通过builder构造的dialog(非alertDialog)却可以 参考showDialogCustom
+		dialog.setContentView(v);
+		
+		//自定义的布局文件如果完全用weight据自动适配，会使得布局很小，可能是内部构建的时候会除去最外部的布局尺寸设定
+		//注意加入的view和dialog的window之前的关系，view的matchparent和wrapcontent以及具体指定大小都会使得效果产生变化
 	}
 	
 	void showAlertDialogCustom()
@@ -122,27 +139,30 @@ public class TestDialogActivity extends Activity {
 		final String[] items = {"1","2","3"};
 		AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT);
 		View v = getLayoutInflater().inflate(R.layout.dialog_custom, null);
-//		builder.setView(v);
-//		builder.setPositiveButton("Yes", null)
-//		.setNegativeButton("No", null);
-//		builder.create().show();
+		builder.setView(v);
+		builder.setPositiveButton("Yes", null)
+		.setNegativeButton("No", null);
+		builder.create().show();
 		//可以对view中的控件进行事件绑定
 		
 		
-		LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-		Dialog dialog = builder.create();
-		dialog.setCanceledOnTouchOutside(true);
-		dialog.show();
-		dialog.setContentView(v,lp);//这句话要写在show之后，但是不通过builder构造的dialog(非alertDialog)却可以 参考showDialogCustom
-		dialog.setContentView(v);
+//		LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//		Dialog dialog = builder.create();
+//		dialog.setCanceledOnTouchOutside(true);
+//		dialog.show();
+//		dialog.setContentView(v,lp);//这句话要写在show之后，但是不通过builder构造的dialog(非alertDialog)却可以 参考showDialogCustom
+//		dialog.setContentView(v);
 		
 		//自定义的布局文件如果完全用weight据自动适配，会使得布局很小，可能是内部构建的时候会除去最外部的布局尺寸设定
 		//注意加入的view和dialog的window之前的关系，view的matchparent和wrapcontent以及具体指定大小都会使得效果产生变化
 	}
 	
+	//默认的设置比如布局填充对齐方式等都会和主题有关，为了主题无关，最好主动设定。
 	protected void showDialogCustom() {
 		Dialog dialog = new Dialog(this,R.style.CustomDialogNoTitle);
-		dialog.setContentView(R.layout.dialog_custom);
+//		Dialog dialog = new Dialog(this,android.R.style.Theme_Translucent_NoTitleBar);
+		dialog.setContentView(R.layout.dialog_custom_2);//这句话设定回去调用对应的dialogwindow相关设置函数
+		dialog.setTitle("haha");
 		dialog.setCancelable(true);
 		dialog.setCanceledOnTouchOutside(true);
 		
@@ -151,7 +171,7 @@ public class TestDialogActivity extends Activity {
 		dialogWindow.setGravity(Gravity.CENTER);
 		int width = getWindowManager().getDefaultDisplay().getWidth()/2;    
 		int height = getWindowManager().getDefaultDisplay().getHeight()/2; 
-		dialogWindow.setLayout(width, height);
+		dialogWindow.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		
 		//以下是利用Attributes来进行设置，一个是设置绝对大小，一个是相对大小
 //		{
