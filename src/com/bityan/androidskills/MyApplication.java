@@ -24,7 +24,7 @@ public class MyApplication extends Application {
 		
 		//尝试启动一个thread
 		Thread thread = new TestThread("thread in application");
-		thread.start();
+//		thread.start();
 	}
 	
 	@Override

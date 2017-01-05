@@ -4,9 +4,20 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+<com.bityan.androidskills.CustomLinearLayout 
+    android:id="@+id/customLayout"
+    android:layout_width="400dp"
+    android:layout_height="400dp"
+    android:layout_centerInParent="true"
+    android:background="@color/wheat"
+    android:gravity="center">
+    
+    <com.bityan.androidskills.CustomButton 
+        android:id="@+id/customButton"
+        android:text="test"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
+    
+</com.bityan.androidskills.CustomLinearLayout>
 
 </RelativeLayout>
