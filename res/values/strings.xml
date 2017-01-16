@@ -14,5 +14,6 @@
     <string name="title_activity_test_crash_handler">TestCrashHandlerActivity</string>
     <string name="title_activity_thread_and_service">ThreadAndServiceActivity</string>
     <string name="title_activity_test_dialog">TestDialogActivity</string>
+    <string name="title_activity_test_handler">TestHandlerActivity</string>
 
 </resources>

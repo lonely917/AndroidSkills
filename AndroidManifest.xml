@@ -94,6 +94,10 @@
             android:name=".TestDialogActivity"
             android:label="@string/title_activity_test_dialog" >
         </activity>
+        <activity
+            android:name=".TestHandlerActivity"
+            android:label="@string/title_activity_test_handler" >
+        </activity>
     </application>
 
 </manifest>
